@@ -2,13 +2,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Я Талантлив 2026 — Расписание конкурсных дней</title>
     
     <!-- SEO & Social -->
     <meta name="description" content="Расписание конкурсных дней фестиваля «Я Талантлив» 2026. Литература, танцы, вокал, театр, мода, медиа и техническое творчество. 26 января – 5 февраля.">
     <meta name="keywords" content="Я Талантлив, фестиваль, конкурс, расписание, 2026, творчество, дети, таланты">
     <meta name="author" content="Фестиваль «Я Талантлив»">
+    <meta name="theme-color" content="#f5f0e8">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Я Талантлив 2026 — Расписание фестиваля">
@@ -16,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_RU">
     
-    <!-- Favicon (simple emoji-based) -->
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>">
     
     <!-- Fonts -->
@@ -35,7 +36,7 @@
             --border-dark: #1a1a1a;
             --accent-red: #c41e3a;
             
-            /* Category colors (for accent strips) */
+            /* Category colors */
             --c-lit: #d4a017;
             --c-dance: #e11d48;
             --c-vocal: #2563eb;
@@ -43,6 +44,10 @@
             --c-fashion: #db2777;
             --c-theatre: #404040;
             --c-tech: #16a34a;
+            
+            /* Spacing */
+            --page-padding: clamp(12px, 2vw, 24px);
+            --card-gap: clamp(8px, 1.2vw, 16px);
         }
 
         * { 
@@ -53,16 +58,20 @@
 
         html {
             font-size: 16px;
+            scroll-behavior: smooth;
         }
 
         body {
             background: var(--bg-paper);
             color: var(--text-dark);
             font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: разрешаем скролл когда нужно */
             min-height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            padding: 2vh 2.5vw;
+            min-height: 100dvh; /* Dynamic viewport для мобильных */
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: var(--page-padding);
             display: flex;
             flex-direction: column;
         }
@@ -86,8 +95,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 1.5vh;
-            margin-bottom: 1.5vh;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            padding-bottom: clamp(8px, 1.5vh, 16px);
+            margin-bottom: clamp(8px, 1.5vh, 16px);
             border-bottom: 3px solid var(--border-dark);
         }
 
@@ -102,25 +113,24 @@
             color: var(--bg-paper);
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
-            font-size: clamp(1.6rem, 2.8vw, 2.4rem);
-            padding: 0.5rem 1.2rem;
+            font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+            padding: 0.4rem 1rem;
             letter-spacing: 0.02em;
             position: relative;
-            box-shadow: 
-                5px 5px 0px var(--accent-red);
+            box-shadow: 4px 4px 0px var(--accent-red);
         }
 
         .logo-badge::after {
             content: '2026';
             position: absolute;
-            bottom: -10px;
-            right: -10px;
+            bottom: -8px;
+            right: -8px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
             background: var(--accent-red);
             color: #fff;
-            padding: 3px 8px;
+            padding: 2px 6px;
             letter-spacing: 0.05em;
         }
 
@@ -128,52 +138,53 @@
         .header-center {
             flex: 1;
             text-align: center;
-            padding: 0 2rem;
+            padding: 0 1rem;
+            min-width: 200px;
         }
 
         .header-sub {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
+            font-size: clamp(0.6rem, 1vw, 0.75rem);
             font-weight: 500;
             color: var(--text-light);
-            letter-spacing: 0.25em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
             font-weight: 900;
-            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            font-size: clamp(1.5rem, 4vw, 3rem);
             text-transform: uppercase;
             letter-spacing: 0.03em;
-            line-height: 1.2;
+            line-height: 1.1;
             color: var(--text-dark);
         }
 
         /* Date Range Badge */
         .header-dates {
             flex-shrink: 0;
-            text-align: left;
+            text-align: right;
         }
 
         .date-range {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
+            font-size: clamp(0.7rem, 1vw, 0.85rem);
             font-weight: 700;
             color: var(--text-dark);
-            padding: 0.6rem 1rem;
+            padding: 0.4rem 0.8rem;
             border: 2px solid var(--text-dark);
             display: inline-block;
         }
 
         .date-range-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 500;
             color: var(--text-light);
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
         }
 
         /* ========================================
@@ -182,12 +193,12 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: 1fr 1fr;
-            gap: 1.5vh 1.2vw;
+            /* КЛЮЧЕВОЕ: auto вместо 1fr — карточки занимают сколько нужно */
+            grid-template-rows: auto auto;
+            gap: var(--card-gap);
             flex: 1;
             position: relative;
             z-index: 2;
-            min-height: 0;
         }
 
         /* Bottom row layout */
@@ -205,23 +216,25 @@
             flex-direction: column;
             overflow: hidden;
             position: relative;
-            box-shadow: 5px 5px 0px var(--border-dark);
+            box-shadow: 4px 4px 0px var(--border-dark);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0px var(--border-dark);
+        @media (hover: hover) {
+            .card:hover {
+                transform: translate(-2px, -2px);
+                box-shadow: 6px 6px 0px var(--border-dark);
+            }
         }
 
         /* Watermark */
         .card::before {
             content: attr(data-number);
             position: absolute;
-            bottom: 8px;
-            right: 12px;
+            bottom: 5px;
+            right: 10px;
             font-family: 'Oswald', sans-serif;
-            font-size: 5rem;
+            font-size: clamp(3rem, 5vw, 5rem);
             font-weight: 700;
             color: var(--text-dark);
             opacity: 0.04;
@@ -233,11 +246,11 @@
         /* Card Header */
         .card-header {
             flex-shrink: 0;
-            padding: 0.7rem 1rem;
+            padding: clamp(0.5rem, 1vh, 0.75rem) clamp(0.6rem, 1vw, 1rem);
             background: var(--text-dark);
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
             position: relative;
         }
 
@@ -247,11 +260,11 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: 6px;
+            width: 5px;
         }
 
         .card-icon {
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
             filter: grayscale(1) brightness(2);
             opacity: 0.9;
         }
@@ -259,7 +272,7 @@
         .card-title {
             font-family: 'Oswald', sans-serif;
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: clamp(0.85rem, 1.1vw, 1.05rem);
             text-transform: uppercase;
             letter-spacing: 0.04em;
             color: #fff;
@@ -269,10 +282,10 @@
         /* Card Body */
         .card-body {
             flex: 1;
-            padding: 1rem 1.1rem;
+            padding: clamp(0.6rem, 1.2vh, 1rem) clamp(0.7rem, 1vw, 1.1rem);
             display: flex;
             flex-direction: column;
-            gap: 0.9rem;
+            gap: clamp(0.5rem, 1vh, 0.9rem);
             position: relative;
             z-index: 1;
         }
@@ -281,15 +294,15 @@
         .session-row {
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
+            gap: clamp(0.2rem, 0.5vh, 0.4rem);
         }
 
-        /* Date Badge - LARGER */
+        /* Date Badge */
         .date-badge {
             align-self: flex-start;
-            padding: 5px 12px;
+            padding: clamp(3px, 0.5vh, 5px) clamp(8px, 1vw, 12px);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: clamp(0.75rem, 1vw, 0.9rem);
             font-weight: 700;
             text-transform: uppercase;
             background: var(--text-dark);
@@ -297,12 +310,12 @@
             letter-spacing: 0.03em;
         }
 
-        /* Time Line - LARGER */
+        /* Time Line */
         .time-line {
             display: flex;
             align-items: baseline;
-            gap: 12px;
-            padding: 5px 0 5px 12px;
+            gap: clamp(8px, 1vw, 12px);
+            padding: clamp(3px, 0.5vh, 5px) 0 clamp(3px, 0.5vh, 5px) clamp(8px, 1vw, 12px);
             margin-left: 3px;
             border-left: 3px solid #e5e5e5;
         }
@@ -310,39 +323,39 @@
         .time {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 800;
-            font-size: 1.1rem;
-            min-width: 55px;
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            min-width: clamp(45px, 5vw, 55px);
             color: var(--text-dark);
         }
 
         .ages {
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 1.1vw, 1rem);
             font-weight: 600;
             color: var(--text-medium);
-            line-height: 1.35;
+            line-height: 1.3;
         }
 
         /* Card Footer */
         .card-footer {
             margin-top: auto;
-            padding: 0.7rem 1rem;
+            padding: clamp(0.4rem, 0.8vh, 0.7rem) clamp(0.6rem, 1vw, 1rem);
             border-top: 1px solid #eee;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .slogan-icon {
-            font-size: 1rem;
-            opacity: 0.6;
+            font-size: 0.85rem;
+            opacity: 0.5;
         }
 
         .slogan {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: clamp(0.55rem, 0.8vw, 0.7rem);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             color: var(--text-light);
         }
 
@@ -371,12 +384,12 @@
         .card--tech .time-line { border-color: rgba(22, 163, 74, 0.3); }
 
         /* ========================================
-           SPECIAL: WIDE CARD (TECH)
+           WIDE CARD (TECH)
            ======================================== */
         .card-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 1rem;
             position: relative;
         }
 
@@ -394,15 +407,16 @@
            FOOTER
            ======================================== */
         .page-footer {
-            padding-top: 2vh;
+            padding-top: clamp(8px, 1.5vh, 16px);
             text-align: center;
             position: relative;
             z-index: 2;
+            flex-shrink: 0;
         }
 
         .page-footer-text {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
+            font-size: clamp(0.55rem, 0.8vw, 0.65rem);
             color: var(--text-light);
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -415,6 +429,7 @@
             body {
                 padding: 1cm;
                 background: white;
+                overflow: visible;
             }
             
             body::before {
@@ -424,33 +439,27 @@
             .card {
                 box-shadow: none;
                 border-width: 1px;
-            }
-            
-            .card:hover {
-                transform: none;
+                break-inside: avoid;
             }
         }
 
         /* ========================================
-           RESPONSIVE (для мобильных, если нужно)
+           RESPONSIVE — TABLETS
            ======================================== */
-        @media (max-width: 1024px) {
-            body {
-                overflow: auto;
-                height: auto;
-                min-height: 100vh;
-            }
-            
+        @media (max-width: 1100px) {
             .grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: auto;
             }
             
-            .grid > .card:nth-child(7) {
-                grid-column: 1 / 3;
-            }
+            .grid > .card:nth-child(5) { grid-column: 1 / 2; }
+            .grid > .card:nth-child(6) { grid-column: 2 / 3; }
+            .grid > .card:nth-child(7) { grid-column: 1 / 3; }
         }
 
+        /* ========================================
+           RESPONSIVE — MOBILE
+           ======================================== */
         @media (max-width: 640px) {
             .grid {
                 grid-template-columns: 1fr;
@@ -464,8 +473,9 @@
             
             header {
                 flex-direction: column;
-                gap: 1rem;
+                align-items: center;
                 text-align: center;
+                gap: 0.75rem;
             }
             
             .header-dates {
@@ -474,10 +484,94 @@
             
             .card-split {
                 grid-template-columns: 1fr;
+                gap: 0.75rem;
             }
             
             .card-split::before {
                 display: none;
+            }
+        }
+
+        /* ========================================
+           RESPONSIVE — VERY SHORT SCREENS
+           (панели закладок, маленькие ноутбуки)
+           ======================================== */
+        @media (max-height: 650px) {
+            :root {
+                --page-padding: 8px;
+                --card-gap: 6px;
+            }
+            
+            .card-header {
+                padding: 0.4rem 0.6rem;
+            }
+            
+            .card-body {
+                padding: 0.5rem 0.6rem;
+                gap: 0.4rem;
+            }
+            
+            .card-footer {
+                padding: 0.35rem 0.6rem;
+            }
+            
+            .session-row {
+                gap: 0.15rem;
+            }
+            
+            .time-line {
+                padding: 2px 0 2px 8px;
+            }
+            
+            h1 {
+                font-size: clamp(1.3rem, 3.5vw, 2rem);
+            }
+            
+            .page-footer {
+                padding-top: 6px;
+            }
+        }
+
+        /* ========================================
+           RESPONSIVE — VERY TALL SCREENS
+           (добавляем отступы для красоты)
+           ======================================== */
+        @media (min-height: 900px) and (min-width: 1200px) {
+            :root {
+                --page-padding: 2.5vw;
+                --card-gap: 1.5vw;
+            }
+            
+            .card-body {
+                padding: 1.2rem 1.3rem;
+                gap: 1rem;
+            }
+        }
+
+        /* ========================================
+           LANDSCAPE MOBILE
+           ======================================== */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: auto auto;
+            }
+            
+            header {
+                flex-direction: row;
+                flex-wrap: nowrap;
+            }
+            
+            .header-center {
+                min-width: auto;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .card-footer {
+                display: none; /* Скрываем слоганы для экономии места */
             }
         }
     </style>
@@ -670,7 +764,7 @@
             </div>
         </article>
 
-        <!-- 7. ТЕХНО + ФОТО (широкая) -->
+        <!-- 7. ТЕХНО + ФОТО -->
         <article class="card card--tech" data-number="07">
             <div class="card-header">
                 <span class="card-icon">📸</span>
