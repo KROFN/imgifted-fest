@@ -610,3 +610,55 @@ border:0;background:none;color:var(--ink);font:800 clamp(18px,1.4vw,23px)/1.2 va
 @media (max-width:620px) and (prefers-reduced-motion:no-preference){
   .hero-date-banner .hero-date-range{animation:ribbonTypeSlideMobile .90s .70s cubic-bezier(.17,1,.32,1) both}
 }
+
+
+/* V7 mobile motion/interaction polish — 2026-11-17.
+   Pure CSS layout for the archived schedule: no sideways gesture trap. */
+.ui-arrow{display:inline-flex;flex:none;align-items:center;justify-content:center;line-height:0;vertical-align:middle}
+.ui-arrow svg{display:block;width:1em;height:1em;overflow:visible;shape-rendering:geometricPrecision}
+.header-cta .ui-arrow{font-size:21px}
+.participant-tile .ui-arrow{font-size:29px;min-width:30px}
+.to-top .ui-arrow{font-size:23px}
+.aside-link .ui-arrow{font-size:21px}
+@media(max-width:900px){
+  .schedule-grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    overflow:visible;overflow-x:visible;scroll-snap-type:none;
+    padding:4px 0 0;gap:0;scrollbar-width:auto;
+  }
+  .schedule-day{
+    flex:none;scroll-snap-align:none;min-width:0;min-height:110px;
+    display:grid;grid-template-columns:minmax(82px,31%) minmax(0,1fr);
+    grid-template-rows:auto auto;
+    column-gap:13px;align-content:center;align-items:center;
+    padding:15px 12px!important;margin:0;
+    border-left:0;border-top:1px solid #f1e6da50;
+  }
+  .schedule-day:nth-child(2n){border-left:1px solid #f1e6da50}
+  .schedule-day strong{grid-column:1;grid-row:1;font-size:clamp(31px,4vw,41px);align-self:end;line-height:1}
+  .schedule-day span{grid-column:1;grid-row:2;align-self:start;margin:2px 0 0;padding:0;border:0;font-size:15px}
+  .schedule-day p{grid-column:2;grid-row:1/3;align-self:center;font-size:clamp(15px,1.9vw,19px);line-height:1.18;min-height:0;margin:0}
+  .schedule .schedule-day.is-past{opacity:.47}
+  .schedule .schedule-day.is-current{box-shadow:inset 5px 0 0 var(--red-bright);background:linear-gradient(90deg,#9b302a66,transparent 85%)}
+  .schedule .schedule-day.is-future{opacity:1}
+}
+@media(max-width:620px){
+  .schedule{padding-bottom:45px}
+  .schedule-grid{grid-template-columns:minmax(0,1fr);margin-top:18px}
+  .schedule-day{min-height:92px;grid-template-columns:90px minmax(0,1fr);column-gap:13px;padding:12px 10px!important}
+  .schedule-day:nth-child(2n){border-left:0}
+  .schedule-day:first-child{border-top:1px solid #f1e6da50}
+  .schedule-day strong{font-size:39px}
+  .schedule-day span{font-size:15px}
+  .schedule-day p{font-size:18px;max-width:285px}
+  .schedule .schedule-day.is-past{opacity:.5}
+  .schedule .schedule-day.is-current{box-shadow:inset 5px 0 0 var(--red-bright);background:linear-gradient(90deg,#a43a2a65,transparent 95%)}
+  .schedule-bottom-note{margin-top:23px}
+  .participant-tile .ui-arrow{font-size:24px;min-width:26px}
+  .header-cta .ui-arrow{font-size:18px}
+}
+@media(max-width:370px){
+  .schedule-day{grid-template-columns:75px minmax(0,1fr);column-gap:9px}
+  .schedule-day strong{font-size:35px}
+  .schedule-day p{font-size:16px}
+}

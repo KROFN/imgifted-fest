@@ -34,7 +34,7 @@ export function InfoDialog({ panel, onClose }: { panel: PanelKey | null; onClose
               <label>Формат участия<select name="format" defaultValue=""><option value="" disabled>Выберите формат</option><option value="solo">Индивидуальный</option><option value="group">Коллектив</option><option value="family">Семейный</option></select></label>
               <label>Направление<select name="category" defaultValue=""><option value="" disabled>Выберите направление</option>{directions.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}</select></label>
             </div>
-            <button type="button" disabled aria-disabled="true" className="demo-disabled-button">ОТПРАВИТЬ ЗАЯВКУ ↗</button>
+            <button type="button" disabled aria-disabled="true" className="demo-disabled-button">ОТПРАВИТЬ ЗАЯВКУ</button>
             <span className="demo-label">Демо: форма не отправляет и не сохраняет данные.</span>
           </form>
         )}

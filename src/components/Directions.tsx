@@ -1,4 +1,5 @@
 import { directions } from '../data/festival';
+import { ArrowIcon } from './ArrowIcon';
 
 export function Directions() {
   return (
@@ -6,7 +7,7 @@ export function Directions() {
       <div className="section-aside">
         <h2 id="directions-title" className="section-title"><strong>7</strong><br />НАПРАВЛЕНИЙ<br />ФЕСТИВАЛЯ</h2>
         <p className="aside-serif">Семь форм творчества.<br />Одна сцена.</p>
-        <a className="aside-link" href="#schedule">РАСПИСАНИЕ <span aria-hidden="true">↘</span></a>
+        <a className="aside-link" href="#schedule">РАСПИСАНИЕ <span className="ui-arrow" aria-hidden="true"><ArrowIcon direction="down-right" /></span></a>
       </div>
       <div className="direction-list" aria-label="Семь направлений фестиваля">
         {directions.map((item) => (

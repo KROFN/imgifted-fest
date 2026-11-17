@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { ArrowIcon } from './ArrowIcon';
 
 const links = [
   { label: 'О фестивале', href: '#about' },
@@ -40,7 +41,7 @@ export function Header() {
         <Mark />
         <span className="brand-slash" aria-hidden="true">/</span>
         <nav className="desktop-nav" aria-label="Главное меню">{links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav>
-        <a className="header-cta" href="#participants">Принять участие <span aria-hidden="true">↗</span></a>
+        <a className="header-cta" href="#participants">Принять участие <span className="ui-arrow" aria-hidden="true"><ArrowIcon /></span></a>
         <button ref={toggleRef} className={`menu-toggle${open ? ' is-open' : ''}`} aria-label={open ? 'Закрыть меню' : 'Открыть меню'} aria-controls="mobile-menu" aria-expanded={open} type="button" onClick={() => setOpen(v => !v)}><span /><span /></button>
       </header>
       <nav ref={menuRef} id="mobile-menu" className="mobile-menu" aria-label="Мобильное меню" hidden={!open}>
@@ -58,8 +59,8 @@ export function Footer() {
       <span className="footer-slash" aria-hidden="true">/</span>
       <p>ФЕСТИВАЛЬ<br />ТВОРЧЕСТВА 2026</p>
       <nav aria-label="Меню в подвале">{links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav>
-      <a className="to-top" href="#top"><span>НАВЕРХ</span><span aria-hidden="true">↑</span></a>
-      <small>Авторский дизайн-концепт · Демо-данные и вымышленные контакты отмечены в макете · Неофициальный сайт. <a href="https://www.rbologoe.ru/about/info/anounces/11182/" target="_blank" rel="noopener noreferrer">Источник реальных сведений ↗</a></small>
+      <a className="to-top" href="#top"><span>НАВЕРХ</span><span className="ui-arrow" aria-hidden="true"><ArrowIcon direction="up" /></span></a>
+      <small>Авторский дизайн-концепт · Демо-данные и вымышленные контакты отмечены в макете · Неофициальный сайт. <a href="https://www.rbologoe.ru/about/info/anounces/11182/" target="_blank" rel="noopener noreferrer">Источник реальных сведений</a></small>
     </footer>
   );
 }

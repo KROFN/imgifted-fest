@@ -12,7 +12,7 @@ export default function App() {
   const [panel, setPanel] = useState<PanelKey | null>(null);
   useEffect(() => {
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const selectors = '.section-aside, .direction-row, .schedule-header, .schedule-context, .schedule-day, .schedule-bottom-note, .participants-heading, .participant-tile, .faq-intro, .faq-item, .footer';
+    const selectors = '.section-aside, .direction-row, .schedule-header, .schedule-context, .schedule-bottom-note, .participants-heading, .participant-tile, .faq-intro, .faq-item, .footer';
     const elements = Array.from(document.querySelectorAll<HTMLElement>(selectors));
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
