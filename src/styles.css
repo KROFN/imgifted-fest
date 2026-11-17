@@ -749,3 +749,74 @@ border:0;background:none;color:var(--ink);font:800 clamp(18px,1.4vw,23px)/1.2 va
  .hero-boot i{width:85px}
 }
 @media(prefers-reduced-motion:reduce){.hero-boot{display:none!important}}
+
+
+/* V9.1: the mobile number belongs to its heading, not a detached display block. */
+.directions-title-lines{display:block}
+@media(max-width:620px) {
+  .directions{
+    padding-top:clamp(23px,6vw,32px);
+    padding-bottom:36px;
+  }
+  .directions .section-aside{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:start;
+    column-gap:12px;
+    row-gap:12px;
+    padding-bottom:23px;
+  }
+  .directions .section-aside .section-title{
+    grid-column:1 / -1;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:0;
+    font-size:clamp(27px,7.25vw,34px);
+    line-height:.92;
+    letter-spacing:-.062em;
+    white-space:nowrap;
+  }
+  .directions .section-aside .section-title strong{
+    flex:none;
+    font-size:clamp(46px,12.7vw,60px);
+    line-height:.85;
+    color:var(--red);
+    margin:0;
+    transform:translateY(-1px);
+  }
+  .directions .section-aside .directions-title-lines{
+    display:block;
+    min-width:0;
+  }
+  .directions .section-aside .aside-serif{
+    grid-column:1;
+    grid-row:2;
+    align-self:end;
+    justify-self:start;
+    margin:0;
+    max-width:205px;
+    font-size:clamp(14px,4vw,17px);
+    line-height:1.19;
+  }
+  .directions .section-aside .aside-link{
+    grid-column:2;
+    grid-row:2;
+    display:inline-flex;
+    align-self:end;
+    justify-self:end;
+    align-items:center;
+    margin:0 0 3px;
+    font-size:11px;
+    gap:6px;
+    text-decoration:none;
+    border-bottom:1px solid currentColor;
+  }
+  .directions .section-aside .aside-link .ui-arrow{font-size:16px}
+}
+@media(max-width:370px) {
+  .directions .section-aside .section-title{font-size:clamp(25px,7.5vw,28px);gap:9px}
+  .directions .section-aside .section-title strong{font-size:46px}
+  .directions .section-aside .aside-serif{font-size:14px}
+  .directions .section-aside .aside-link{font-size:10px}
+}
