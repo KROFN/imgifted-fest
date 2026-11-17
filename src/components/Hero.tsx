@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
 // Cut lines follow the ORIGINAL art's diagonal printed seams.
 // Every layer samples the same 702x415 collage: no remade imagery, no asset drift.
@@ -16,8 +16,41 @@ const collageStrips = [
 const artSrc = `${import.meta.env.BASE_URL}assets/hero-collage.webp`;
 
 export function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const [loadState, setLoadState] = useState<'loading' | 'ready' | 'static'>('loading');
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setLoadState('static');
+      return;
+    }
+
+    const hero = heroRef.current;
+    if (!hero) return;
+    let cancelled = false;
+    let timeoutId: number | undefined;
+
+    // On mobile, cached images may be available before their decode is finished.
+    // Start the composed stage only after the image copies and fonts have settled.
+    const preload = async () => {
+      const images = Array.from(hero.querySelectorAll<HTMLImageElement>('.hero-art img'));
+      await Promise.all([document.fonts.ready, ...images.map((img) => img.decode())]);
+      return true;
+    };
+    const timeout = new Promise<false>((resolve) => {
+      timeoutId = window.setTimeout(() => resolve(false), 4500);
+    });
+    void Promise.race([preload().catch(() => false), timeout]).then((ok) => {
+      if (!cancelled) setLoadState(ok ? 'ready' : 'static');
+    });
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
-    <section className="hero" id="about" aria-labelledby="hero-title">
+    <section ref={heroRef} className={'hero hero--' + loadState} id="about" aria-labelledby="hero-title">
       <div className="hero-art" aria-hidden="true">
         {/* Real image is the exact post-animation result and reduced-motion fallback. */}
         <img className="hero-art-base" src={artSrc} alt="" width="702" height="415" fetchPriority="high" />
@@ -43,12 +76,16 @@ export function Hero() {
           ))}
         </div>
         <span className="hero-art-rough" />
+        {loadState === 'loading' && (
+          <div className="hero-boot" role="status">
+            <span>СОБИРАЕМ КАДР</span><i aria-hidden="true" />
+          </div>
+        )}
       </div>
       <div className="hero-content">
         <p className="hero-kicker">Фестиваль творчества<br />детей и молодёжи <span className="hairline" aria-hidden="true" /></p>
         <h1 id="hero-title" className="hero-title">Я ТАЛАНТЛИВ</h1>
         <div className="hero-manifest"><span className="red-stroke" aria-hidden="true" /><p>ПЕРВЫЙ<br />ВЫХОД</p></div>
-        <p className="hero-side-note">Семь направлений.<br />Одна сцена.</p>
       </div>
       <div className="hero-date-banner" aria-label="Конкурсные дни: 26 января — 6 февраля 2026 года">
         <span className="hero-date-range"><span className="hero-date-start">26.01</span><span className="hero-date-dash" aria-hidden="true">—</span><span className="hero-date-end">06.02.2026</span></span>
