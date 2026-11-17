@@ -1,28 +1,22 @@
-# imgifted-fest
+# Я Талантлив — Первый выход (концепт V6)
 
-Finished event landing page for the “Я талантлив” city festival.
+Авторский редизайн сайта молодёжного фестиваля: коллажная визуальная система из семи художественных фактур, React/TypeScript-интерфейс, адаптивная верстка, анимация Hero и архивная шкала программы.
 
-> **Status:** Finished public/event website.  
-> Built as a compact informational page for a real event schedule and presentation flow.
+**Неофициальный дизайн-концепт.** Сайт не связан с организаторами, не принимает настоящие заявки. Контакты в демонстрационных окнах — вымышленные. В календаре показано условное состояние на 2 февраля 2026 года: реальные дни мероприятия уже прошли. Сведения из официального анонса — https://www.rbologoe.ru/about/info/anounces/11182/.
 
-## What it is
+## Запуск
 
-This repository contains a static landing page for the “Я талантлив” festival. The page is designed to present contest days, categories and event information in a clean, accessible format.
+```bash
+npm ci
+npm run dev
+```
 
-## What it shows
+Проверка:
 
-- static event website structure
-- responsive HTML/CSS implementation
-- public information presentation
-- lightweight no-framework delivery
-- practical frontend work for a real-world event context
+```bash
+npm run build
+```
 
-## Stack
+Стек: React 19, TypeScript, Vite 7, CSS animations, IntersectionObserver. Изображения коллажа — иллюстративные.
 
-- HTML
-- CSS
-- JavaScript
-
-## Notes
-
-This repository is part of my public web portfolio. It is kept as a finished event website rather than an actively maintained product.
+Тесты Chromium/Playwright (Node2): 1440, 1280, 1024, 768, 390, 320 px, отсутствие overflow и битых изображений, состояние календаря, модальные окна, FAQ, вход анимации.
